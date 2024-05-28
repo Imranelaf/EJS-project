@@ -1,0 +1,16 @@
+project
+    |
+    |__static
+        |
+        |__style.css
+    |
+    |__views
+         |
+         |__footer.ejs
+         |
+         |__header.ejs
+         |
+         |__index.ejs
+    |
+    |__script.js
+

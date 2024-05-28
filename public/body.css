@@ -1,0 +1,40 @@
+.container{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center ;
+}
+/* .card{
+    height: fit-content;
+    width: 100%;
+    display: grid;
+    margin-top: 40px;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    margin-left: 100px;
+    
+} */
+.imgcategory{
+    margin: 5px;
+    height: 280px;
+    width: 250px;
+    
+    border-radius: 5px;
+    
+}
+
+.btncategory{
+    width: 80%;
+    height: 20%;
+    background-color: pink;
+    margin-left: 5%;
+    margin-top: 90%;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+}
+

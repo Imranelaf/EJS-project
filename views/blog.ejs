@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include("header.ejs") %>
+<form action="/submit" method="get">
+    <div class="blog-container">
+        <input type="text" name="name" placeholder="Enter your name" required><br>
+        <input type="text" name="email" placeholder="Enter your E-mail" required><br>
+        <textarea name="text" placeholder="..." required></textarea > <br>
+        <button type="submit">send</button>
+    </div>
+</form>
+
+<%- include("footer.ejs") %>
+</body>
+</html>

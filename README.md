@@ -1,7 +1,7 @@
 AUTHOR IMRANE ALI LAFKIH
 
-this is my first EJS project
 
-To start use:
-user@machine:~/EJS-project#npm install
-user@machine:~/EJS-project#node script.js
+to start use commands:
+
+root@imrane://EJS-project# npm install
+root@imrane:/EJS-project# node script.js

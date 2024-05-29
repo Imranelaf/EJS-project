@@ -3,6 +3,12 @@ project
     |__static
         |
         |__style.css
+	 __abput.css
+	 __blog.css
+	 __footer.css
+	 __header.css
+	 __footer.css
+	 
     |
     |__views
          |
@@ -11,6 +17,10 @@ project
          |__header.ejs
          |
          |__index.ejs
+	 |
+         |__body.ejs
+	 |
+         |__about.ejs
     |
     |__script.js
 

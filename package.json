@@ -1,5 +1,5 @@
 {
-  "name": "authentification_user",
+  "name": "fix-project",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.4.4"
+    "mongoose": "^8.5.0"
   }
 }

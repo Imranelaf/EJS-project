@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
         res.status(201).json(user._id);
     }catch(error){
         //failed
-        console.log(error)
+        res.status(500).json({ message: "Server error" });
     }
     /* try {
         // Find the user by email

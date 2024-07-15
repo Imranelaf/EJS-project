@@ -12,19 +12,16 @@
         <div id="Err" style="color: red;"></div>
         <label for="email">Email</label>
         <input type="text" name="email" id="email" required>
-
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
-        
         <button type="submit">Login</button>
-        <p>Not a membre yet? <a href="./register">Register</a></p>
+        <p>Not a member yet? <a href="./register">Register</a></p>
     </form>
-    
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value; 
+            const password = document.getElementById("password").value;
             const data = { email, password };
 
             try {
@@ -37,6 +34,7 @@
                 if (response.ok) {
                     const result = await response.json();
                     console.log('Success:', result);
+                    window.location.href = '/'; // Redirect to home page on success
                 } else {
                     const error = await response.json();
                     console.error('Error:', error.message);

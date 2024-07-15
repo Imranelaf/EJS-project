@@ -9,34 +9,30 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        //you can add your own error message
-        required: [true, "please enter an email"],
-        // you can't add the error message on some field like 'unique' for exemple
-        unique: true,
+        required: [true, "Please enter an email"],//you can add your own error message
+        unique: true,// you can't add the error message on some field like 'unique' for exemple
         lowercase: true
     },
     password: {
         type: String,
         required: true,
-        minlength: [6 , 'minimum length is 6 caracters']
+        minlength: [6, 'Minimum length is 6 characters']
     }
 });
 
-// check login process
-
-//creating a statics function of login inside user
+// Static method for login
 userSchema.statics.login = async function(email, password) {
     //check if the email exist in data usinf findOne mongoose function 
-    const user = await this.findOne({email});
-    if (user){
+    const user = await this.findOne({ email });
+    if (user) {
         // if the user exist we gonna check the password
-        const isMatch = await bcrypt.compare(password, user.password );
-        if(isMatch){
-            return user;// if email and password match
-        }throw Error("Incorrect password"); //hundle errors
-
-    }throw Error("Incorrect Email");
-
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+            return user;
+        }
+        throw Error("Incorrect password");
+    }
+    throw Error("Incorrect email");
 }
 
 const User = mongoose.model("User", userSchema);

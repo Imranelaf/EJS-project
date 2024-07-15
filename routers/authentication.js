@@ -1,22 +1,20 @@
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
-const User = require('../model/userDb');
 const jwt = require('jsonwebtoken');
+const User = require('../model/userDb');
 const cookieParser = require('cookie-parser');
+const { checkAuth } = require('./checkAuthentication');
 const router = Router();
 
 router.use(cookieParser());
-const expire = 60*60*24*3;//3 days
+const expire = 60 * 60 * 24 * 3; // 3 days
 
-//this is a function for creating a token
-function createToke(id){
-    /* .sign() is the method that create the jwt, note that the signature need to be secret
-    this token well be expired in 3 days (jwt expire in seconds) */
-    return jwt.sign({id}, 'This is the secret signature', {expiresIn: expire}); 
+// Function for creating a token
+function createToken(id) {
+    return jwt.sign({ id }, 'This is the secret signature', { expiresIn: expire });
 }
 
-
-router.get("/", (req, res) => {
+router.get("/", checkAuth, (req, res) => {
     // Render index.ejs from the 'views' directory
     res.render("index");
 });
@@ -26,41 +24,26 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
-// recieving data from the browser in login
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     console.log(`email ${email}`);
     console.log(`password ${password}`);
 
-    // check the email and password using a statics function in userDb file inside model folder
-    try{
-        //success
+    // Check the email and password using a static function in userDb file inside model folder
+    try {
         const user = await User.login(email, password);
-        res.status(201).json(user._id);
-    }catch(error){
-        //failed
-        res.status(500).json({ message: "Server error" });
-    }
-    /* try {
-        // Find the user by email
-        const user = await User.findOne({ email });
+        const token = createToken(user._id); // Generate token
 
-        if (!user) {
-            return res.status(400).json({ message: "User does not exist" });
-        }
-
-        // Compare the password with the hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        if (isMatch) {
-            res.json({ message: "User exists and password matches" });
-        } else {
-            res.status(400).json({ message: "Incorrect password" });
-        }
+        // Send the token to the browser using cookie; note that cookie expires in ms.
+        res.cookie("tokenName", token, {
+            maxAge: expire * 1000, // *1000 to make cookie expire in 3 days as token
+            httpOnly: true, // Remove access to cookie from the console
+            sameSite: 'Lax' // Improves security
+        }).status(201).json({ message: "Login successful", userId: user._id });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
-    } */
+        // Handle errors
+        res.status(400).json({ message: error.message });
+    }
 });
 
 router.get("/register", (req, res) => {
@@ -68,7 +51,7 @@ router.get("/register", (req, res) => {
     res.render("register");
 });
 
-//hundel the request recieve from register of the browser
+// Handle the request received from register of the browser
 router.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
     console.log({ username, email, password });
@@ -83,16 +66,14 @@ router.post("/register", async (req, res) => {
         // Save the new user in the database
         await newUser.save();
 
-        //generate a token by calling the function and setting the id of user by the database
-        const token = createToke(newUser._id);
+        // Generate a token by calling the function and setting the id of user by the database
+        const token = createToken(newUser._id);
 
-        //send the token to the browser using cookie; note that cookie expired in ms.
-        res.cookie("tokenName", token,
-             {maxAge: expire * 1000,//*1000 to make cookie expired in 3 days as token
-              httpOnly: true,//remove the access to cookie from the console
-              sameSite: 'Lax' // Improves security
-             }).status(201).json({message: 'success'}); 
-
+        res.cookie("tokenName", token, {
+            maxAge: expire * 1000, // *1000 to make cookie expire in 3 days as token
+            httpOnly: true, // Remove access to cookie from the console
+            sameSite: 'Lax' // Improves security
+        }).status(201).json({ message: "Registration successful" });
     } catch (error) {
         // Check for duplicate email error (MongoDB error code 11000)
         if (error.code === 11000) {

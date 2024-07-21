@@ -2,7 +2,9 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const auth = require('./routers/authentication');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const dataUrl = 'url';
+const {checkUser} = require('./routers/checkAuthentication');
 const app = express();
 const port = 8080;
 
@@ -13,6 +15,7 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 //connect to mongoDb
 
@@ -23,6 +26,8 @@ mongoose.connect(dataUrl)
 
 //routes
 
+
+app.get("*", checkUser);
 app.use("/", auth);
 
 

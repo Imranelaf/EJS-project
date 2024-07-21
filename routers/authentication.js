@@ -85,4 +85,11 @@ router.post("/register", async (req, res) => {
     }
 });
 
+
+//logout by sending updating the token by setting empty string and expired in 1ms 
+router.get('/logout', (req, res)=>{
+    res.cookie("tokenName", '', {
+        maxAge: 1
+    }).redirect("login");
+})
 module.exports = router;

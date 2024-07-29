@@ -32,5 +32,7 @@ app.get("*", checkUser);
 app.use("/", auth);
 app.use("/", route);
 
-
-
+// 404 Error Handler
+app.use((req, res) => {
+    res.status(404).render("404");
+});

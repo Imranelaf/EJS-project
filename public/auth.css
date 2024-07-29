@@ -1,0 +1,32 @@
+.container{
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    padding-top: 2rem;
+    border: 1px black solid;
+    
+}
+
+
+.container input{
+    
+    width: 50%;
+    height: 2.5rem;
+    outline: none;
+    padding-left: 2%;
+    border-style: none;
+    border: 1px solid black;
+    margin: .5rem 10%;
+}
+.container input::placeholder{
+    letter-spacing: .15rem;
+}
+
+.container button{
+    width: 30%;
+    height: 2.5rem;
+    margin: 1rem;
+}

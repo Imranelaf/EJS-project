@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <title>Register</title>
 </head>
 <body>
     <!-- Registration form with username, email, and password fields -->
-    <form id="signForm">
-        <h2>Register</h2>
-        <div id="Error" style="color: red;"></div>
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" required>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <button type="submit">Sign In</button>
-        <p>Already have an account? <a href="./login">Login</a></p>
-    </form>
+    <div class="container">
+        <div class="card">
+            <form id="signForm">
+                <h2>Register</h2>
+                <div id="Error" style="color: red;"></div>
+                <input type="text" name="username" id="username" placeholder="Username" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <br>
+                <button type="submit">Sign In</button>
+                <p>Already have an account? <a href="./login">Login</a></p>
+            </form>
+        </div>
+    </div>
     <script>
         document.getElementById('signForm').addEventListener('submit', async (e) => {
             e.preventDefault();

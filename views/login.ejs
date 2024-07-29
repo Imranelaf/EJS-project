@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <title>Login</title>
 </head>
 <body>
     <!-- Login form with email and password fields -->
-    <form id="loginForm">
-        <h2>Login</h2>
-        <div id="Err" style="color: red;"></div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <button type="submit">Login</button>
-        <p>Not a member yet? <a href="./register">Register</a></p>
-    </form>
+    <div class="container">
+        <form id="loginForm">
+            <h2>Login</h2>
+            <div id="Err" style="color: red;"></div>
+            <input type="text" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <br>
+            <button type="submit">Login</button>
+            <p>Not a member yet? <a href="./register">Register</a></p>
+        </form>
+    </div>
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();

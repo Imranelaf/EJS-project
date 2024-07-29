@@ -34,3 +34,17 @@
     width: 30%;
     margin: 1rem;
 }
+
+.choose{
+    border-style: none;
+    padding: .5rem 0.8rem;
+    margin-top: 1rem;
+}
+
+.choose:hover{
+    background-color: rgb(218, 213, 213);
+}
+
+.blog-container ::placeholder{
+    letter-spacing: .15rem;
+}

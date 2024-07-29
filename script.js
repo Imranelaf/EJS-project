@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const dataUrl = 'url';
 const {checkUser} = require('./routers/checkAuthentication');
+const route = require("./routers/Routes")
 const app = express();
 const port = 8080;
 
@@ -29,5 +30,7 @@ mongoose.connect(dataUrl)
 
 app.get("*", checkUser);
 app.use("/", auth);
+app.use("/", route);
+
 
 

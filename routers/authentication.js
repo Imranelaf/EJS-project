@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/userDb');
 const cookieParser = require('cookie-parser');
 const { checkAuth } = require('./checkAuthentication');
-const router = Router();
+const auth = Router();
 
-router.use(cookieParser());
+auth.use(cookieParser());
 const expire = 60 * 60 * 24 * 3; // 3 days
 
 // Function for creating a token
@@ -14,17 +14,17 @@ function createToken(id) {
     return jwt.sign({ id }, 'This is the secret signature', { expiresIn: expire });
 }
 
-router.get("/", checkAuth, (req, res) => {
+auth.get("/", checkAuth, (req, res) => {
     // Render index.ejs from the 'views' directory
     res.render("index");
 });
 
-router.get("/login", (req, res) => {
+auth.get("/login", (req, res) => {
     // Render login.ejs from the 'views' directory
     res.render("login");
 });
 
-router.post("/login", async (req, res) => {
+auth.post("/login", async (req, res) => {
     const { email, password } = req.body;
     console.log(`email ${email}`);
     console.log(`password ${password}`);
@@ -46,13 +46,13 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.get("/register", (req, res) => {
+auth.get("/register", (req, res) => {
     // Render register.ejs from the 'views' directory
     res.render("register");
 });
 
 // Handle the request received from register of the browser
-router.post("/register", async (req, res) => {
+auth.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
     console.log({ username, email, password });
 
@@ -87,9 +87,9 @@ router.post("/register", async (req, res) => {
 
 
 //logout by sending updating the token by setting empty string and expired in 1ms 
-router.get('/logout', (req, res)=>{
+auth.get('/logout', (req, res)=>{
     res.cookie("tokenName", '', {
         maxAge: 1
     }).redirect("login");
 })
-module.exports = router;
+module.exports = auth;

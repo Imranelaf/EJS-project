@@ -12,9 +12,9 @@
 
     <div class="blog-container">
         <h3>Blog About</h3>
-        <form action="/submit" method="post">
+        <form id="blog">
             <label for="category">Choose </label>
-            <select name="category" id="category"  class="choose" required>
+            <select name="category" id="category"  class="choose" name="category" required>
                 <option disabled selected>category:</option>
                 <option value="Finance">Finance</option>
                 <option value="Sport">Sport</option>
@@ -22,7 +22,7 @@
                 <option value="Others">Others</option>
             </select>
             <br>
-            <input type="text" placeholder="Title" required>
+            <input type="text" placeholder="Title" id="title" required>
             <textarea name="text" id="content" placeholder="Write your blog post here..." required></textarea>
             <br><br>
             <button type="submit">Send</button>
@@ -30,5 +30,40 @@
     </div>
 
     <%- include("footer.ejs") %>
+    
+    <script>
+        document.getElementById("blog").addEventListener("submit", async (e)=>{
+            e.preventDefault();
+
+            const category = document.getElementById("category").value;
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+            data = {category, title, content};
+
+            try {
+                const response = await fetch('/blog', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Success:', result);
+                    window.location.href = '/'; // Redirect to home page on success
+                } else {
+                    const error = await response.json();
+                    console.error('Error:', error.message);
+                    document.getElementById('Err').innerText = error.message;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
+        });
+
+
+    </script>
+    
 </body>
 </html>

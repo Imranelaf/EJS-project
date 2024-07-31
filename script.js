@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const auth = require('./routers/authentication');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const dataUrl = 'url';
+const dataUrl = 'mongodb+srv://imrane:Azerty123@imrane.3acdgul.mongodb.net/?retryWrites=true&w=majority&appName=imrane';
 const {checkUser} = require('./routers/checkAuthentication');
 const route = require("./routers/Routes")
 const app = express();

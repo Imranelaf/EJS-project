@@ -36,3 +36,17 @@
     background-size: cover;
     cursor: pointer;
 }
+
+.logout{
+    background-color: rgb(231, 230, 230);
+    border: 1px black solid;
+    padding: .5rem;
+    text-decoration-line: none;
+    color: black;
+    border-radius: 5%;
+}
+
+.logout:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
